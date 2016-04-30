@@ -1,0 +1,39 @@
+body {
+  /*background-image: url(images/concrete3.png);*/
+  background-color: #858585;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 0;
+  padding-bottom: 30px;
+  
+}
+
+.display-3 {
+	font-family: Courier New;
+}
+
+.jumbotron {
+	opacity: 0.3;
+}
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
