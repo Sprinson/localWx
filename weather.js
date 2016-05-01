@@ -1,7 +1,8 @@
 $(document).ready(function(){
 	 
-var url, c, f, description;
+var url, urlOpen, c, f, description, sunset, sunrise;
 var date = new Date;
+var currHour = date.getHours();
 
 
 	//$("#getLocation").on("click", function(){
@@ -12,17 +13,21 @@ var date = new Date;
 	    	var lat = position.coords.latitude;
 	    	var lon = position.coords.longitude;
 	    	//url to retrive JSON object from wunderground.  API key: 1c48f3eebc8ead0c
-	        url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/forecast/alert/q/" + lat + "," + lon + ".json";
-
+	        url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
+	        urlOpen = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&mode=json&units=metric&APPID=0531039e1fb1d6ebe80315823a3cccc3";
 //Picking out properties from JSON object and assigning them to variables or sending them to html
 	      $.getJSON(url, function(json){
 	      	c = json["current_observation"]["temp_c"];
 	      	f = Math.round((1.8 * c) + 32);
 	      	description = json["current_observation"]["weather"].toUpperCase();
+	      	sunset = json["moon_phase"]["sunset"]["hour"];
+	      	sunrise = json["moon_phase"]["sunrise"]["hour"];
 	      	$(".display-3").html(json["current_observation"]["display_location"]["full"]);
 	      	$(".lead").html(c + " &#8451 " + " | " + f + " &#8457<br>" + description + "<br> Local Time: " + date);
-	      	
-	      	alert("Your browser does not support this.");
+	      	//currHour = date.substr(17, 2);
+	      	console.log(currHour);
+
+
 	      	//console.log(json["current_observation"]["full"]);
 
 //if / else if statements to determine what picture should populate the background
@@ -53,13 +58,15 @@ var date = new Date;
 		      	} else if (description.indexOf("SAND") >= 0 || description.indexOf("DUST") >= 0){
 		      		$('body').css('background-image', 'url(images/sand.jpg)');
 		      	}
-	      	 
-	     
-	      });
+	      	}); 
 	    });
 	  } else {
 	  	alert("Your browser does not support this.");
 	  }
+	     
+	      
+	    
+	  
 	  
 	//});
   
