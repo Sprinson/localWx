@@ -5,8 +5,8 @@ body {
   background-size: cover;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding-top: 0;
   padding-bottom: 30px;
+  display: none;
   
 }
 
@@ -16,7 +16,13 @@ body {
 
 .jumbotron {
 	opacity: 0.3;
+
 }
+
+
+
+
+
 
 
 
