@@ -1,19 +1,25 @@
+
 $(document).ready(function(){
 	 
+
+
+
+
 var url, urlOpen, c, f, description, sunset, sunrise;
 var date = new Date;
 var currHour = (date.getHours() * 100) + date.getMinutes();
 
-
+	  	
 	//$("#getLocation").on("click", function(){
-
+		
 //Retrieving lat/lon of current location and storing them in variables.
-	  if (navigator.geolocation){
+	if (navigator.geolocation){
 	    navigator.geolocation.getCurrentPosition(function(position){
 	    	var lat = position.coords.latitude;
 	    	var lon = position.coords.longitude;
 	    	//url to retrive JSON object from wunderground.  API key: 1c48f3eebc8ead0c
 	        url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
+	        //url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/32.5562,-85.6382.json";
 			
 		  //Picking out properties from wunderground JSON object and assigning them to variables.
 	      $.getJSON(url, function(json){
@@ -37,65 +43,75 @@ var currHour = (date.getHours() * 100) + date.getMinutes();
 	      	
 			//[if else if] statements to determine what picture should populate the background
       		if(description === "CLEAR" && dayNight()){
-	      		$('body').css('background-image', 'url(images/clear.jpg)');
+	      		$('#image').css('background-image', 'url(images/clear.jpg)');
 	      	} 
 	      	else if(description === "CLEAR" && !dayNight()){
-	      		$('body').css('background-image', 'url(images/clearNight.jpg)');
+	      		$('#image').css('background-image', 'url(images/clearNight.jpg)');
+	      		//document.getElementById("test").style.color = "red";
+	      		document.getElementById("test").style.opacity = "0.6";
 	      	} 
 	      	else if (dayNight() && description.indexOf("SCATTERED") >= 0 || description.indexOf("PARTLY") >= 0) {
-	      		$('body').css('background-image', 'url(images/scattered.jpg)');
+	      		$('#image').css('background-image', 'url(images/scattered.jpg)');
 	      		document.getElementById("test").style.opacity = "0.6";
 	      	}
-	      	else if (description.indexOf("SCATTERED") >= 0 || description.indexOf("PARTLY") >= 0 && !dayNight() ) {
-	      		$('body').css('background-image', 'url(images/scatteredNight.jpg)');
+	      	else if (description.indexOf("PARTLY") >= 0 || description.indexOf("SCATTERED") >= 0 && !dayNight()) {
+	      		$('#image').css('background-image', 'url(images/scatteredNight.jpg)');
+	      		document.getElementById("test").style.opacity = "0.4";
 	      	}
 	      	else if(description.indexOf("MOSTLY") >= 0 && dayNight()) {
-	      		$('body').css('background-image', 'url(images/broken.jpg)');
+	      		$('#image').css('background-image', 'url(images/broken.jpg)');
 	      	}
 	      	else if(description.indexOf("MOSTLY") >= 0 && !dayNight()) {
-	      		$('body').css('background-image', 'url(images/brokenNight.jpg)');
+	      		$('#image').css('background-image', 'url(images/brokenNight.jpg)');
+	      		document.getElementById("test").style.opacity = "0.4";
 	      	}
 	      	else if (description === "OVERCAST" && dayNight()){
-	      		$('body').css('background-image', 'url(images/overcast.jpg)');
+	      		$('#image').css('background-image', 'url(images/overcast.jpg)');
 	      	}
 	      	else if (dayNight() && description.indexOf("THUNDERSTORM") >= 0 || description.indexOf("HAIL") >= 0){
-	      		$('body').css('background-image', 'url(images/thunderstorm.jpg)');
+	      		$('#image').css('background-image', 'url(images/thunderstorm.jpg)');
 	      		document.getElementById("test").style.opacity = "0.7";
 	      	}
 	      	else if (description.indexOf("THUNDERSTORM") >= 0 || description.indexOf("HAIL") >= 0 && !dayNight()){
-	      		$('body').css('background-image', 'url(images/thunderstormNight.jpg)');
+	      		$('#image').css('background-image', 'url(images/thunderstormNight.jpg)');
+	      		document.getElementById("test").style.opacity = "0.4";
 	      	}
 	      	else if (description.indexOf("SNOW") >= 0 && dayNight()){
-	      		$('body').css('background-image', 'url(images/snow.jpg)');
-	      		document.getElementById("test").style.opacity = "0.8";
+	      		$('#image').css('background-image', 'url(images/snow.jpg)');
+	      		document.getElementById("test").style.opacity = "0.8";	
 	      	}
 	      	else if (description.indexOf("SNOW") >= 0 && !dayNight()){
-	      		$('body').css('background-image', 'url(images/snowNight.jpg)');
+	      		$('#image').css('background-image', 'url(images/snowNight.jpg)');
 	      		document.getElementById("test").style.opacity = "0.5";
 	      	}
 	      	else if (dayNight() && description.indexOf("RAIN") >= 0 || description.indexOf("DRIZZLE") >= 0){
-	      		$('body').css('background-image', 'url(images/rain.jpg)');
+	      		$('#image').css('background-image', 'url(images/rain.jpg)');
 	      		document.getElementById("test").style.opacity = "0.6";
 	      	}
 	      	else if (description.indexOf("RAIN") >= 0 || description.indexOf("DRIZZLE") >= 0 && !dayNight()){
-	      		$('body').css('background-image', 'url(images/rainNight.jpg)');
+	      		$('#image').css('background-image', 'url(images/rainNight.jpg)');
+	      		document.getElementById("test").style.opacity = "0.4";
 	      	}
 	      	else if (dayNight() && description.indexOf("FOG") >= 0 || description.indexOf("MIST") >= 0){
-	      		$('body').css('background-image', 'url(images/fog.jpg)');
+	      		$('#image').css('background-image', 'url(images/fog.jpg)');
 	      	}
 	      	else if (dayNight() && description.indexOf("SMOKE") >= 0 || description.indexOf("HAZE") >= 0){
-	      		$('body').css('background-image', 'url(images/haze.jpg)');
+	      		$('#image').css('background-image', 'url(images/haze.jpg)');
 	      	}
 	      	else if (description.indexOf("VOLCANIC") >= 0){
-	      		$('body').css('background-image', 'url(images/volcano.jpg)');
+	      		$('#image').css('background-image', 'url(images/volcano.jpg)');
 	      		document.getElementById("test").style.opacity = "0.5";
 	      	}
 	      	else if (dayNight() && description.indexOf("SAND") >= 0 || description.indexOf("DUST") >= 0){
-	      		$('body').css('background-image', 'url(images/sand.jpg)');
+	      		$('#image').css('background-image', 'url(images/sand.jpg)');
 	      	}
 	      	else if (!dayNight() && description === "OVERCAST" || description.indexOf("MIST") >= 0 || description.indexOf("HAZE") >=0 || description.indexOf("DUST") >=0 || description.indexOf("SAND") >=0 || description.indexOf("SMOKE") >=0 || description.indexOf("FOG") >=0){
-	      		$('body').css('background-image', 'url(images/hazeNight.jpg)');
+	      		$('#image').css('background-image', 'url(images/hazeNight.jpg)');
+	      		document.getElementById("test").style.opacity = "0.4";
 	      	}
+	      
+	      $("body[id$='image']").fadeIn(5000);
+	      $(".loading").fadeOut(1500);
       	}); 
     });
   } else {
