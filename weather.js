@@ -2,9 +2,7 @@
 $(document).ready(function(){
 	 
 
-$(function(){
-	$("body").fadeIn(4000);
-});
+
 
 
 var url, urlOpen, c, f, description, sunset, sunrise;
@@ -111,6 +109,7 @@ var currHour = (date.getHours() * 100) + date.getMinutes();
 	      		$('#image').css('background-image', 'url(images/hazeNight.jpg)');
 	      		document.getElementById("test").style.opacity = "0.4";
 	      	}
+	      
 	      $("body[id$='image']").fadeIn(5000);
 	      $(".loading").fadeOut(1500);
       	}); 
