@@ -49,11 +49,13 @@ var currHour = (date.getHours() * 100) + date.getMinutes();
 	      		$('#image').css('background-image', 'url(images/clearNight.jpg)');
 	      		//$('#test').css('opacity', 0.6);
 	      		$('#test').addClass('opacity6');
+	      		
 	      	} 
 	      	else if (dayNight() && description.indexOf("SCATTERED") >= 0 || description.indexOf("PARTLY") >= 0) {
-	      		$('#image').css('background-image', 'url(images/scattered.jpg)');
+	      		//$('#image').css('background-image', 'url(images/scattered.jpg)');
 	      		//$('#test').css('opacity', 0.6);
 	      		$('#test').addClass('opacity6');
+	      		$('#image').addClass('scattered');
 	      	}
 	      	else if (description.indexOf("PARTLY") >= 0 || description.indexOf("SCATTERED") >= 0 && !dayNight()) {
 	      		$('#image').css('background-image', 'url(images/scatteredNight.jpg)');

@@ -44,6 +44,169 @@
   opacity: 0.8;
 }
 
+.clear {
+  background-image: url(images/clear.jpg)
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.clearNight {
+  background-image: url(images/clearNight.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.scattered {
+  background-image: url(images/scattered.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+  
+}
+.scatteredNight {
+  background-image: url(images/scatteredNight.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.broken{
+  background-image: url(images/broken.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.brokenNight{
+  background-image: url(images/brokenNight.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.overcast{
+  background-image: url(images/overcast.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.overcastNight{
+  background-image: url(images/hazeNight.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.thunderstorm{
+  background-image: url(images/thunderstorm.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.thunderstormNight{
+  background-image: url(images/thunderstormNight.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.snow{
+  background-image: url(images/snow.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.snowNight{
+  background-image: url(images/snowNight.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.rain{
+  background-image: url(images/rain.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.rainNight{
+  background-image: url(images/rainNight.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.fog{
+  background-image: url(images/fog.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.smoke{
+  background-image: url(images/haze.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.sand{
+  background-image: url(images/sand.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
+.volcanic{
+  background-image: url(images/volcano.jpg);
+  background-color: #f2f2f2;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; 
+}
 
 
 
