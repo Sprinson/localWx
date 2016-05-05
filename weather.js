@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-	var url, urlOpen, c, f, description, sunset, sunrise, icon, zipCode;
+	var url, c, f, description, sunset, sunrise, icon, zipCode;
 	var date = new Date;
 	var currHour = (date.getHours() * 100) + date.getMinutes();
 //Retrieving lat/lon of current location and storing them in variables.
@@ -20,7 +20,7 @@ $(document).ready(function(){
 	        	$(".loading").fadeIn(500);
 	        	getWeather();
 	        });
-			  
+			
 			function getWeather(){
 			  	$.getJSON(url, function(json){
 			  		c = json["current_observation"]["temp_c"];
