@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 
 
-var url, urlOpen, c, f, description, sunset, sunrise;
+var url, urlOpen, c, f, description, sunset, sunrise, icon;
 var date = new Date;
 var currHour = (date.getHours() * 100) + date.getMinutes();
 
@@ -19,7 +19,7 @@ var currHour = (date.getHours() * 100) + date.getMinutes();
 	    	var lon = position.coords.longitude;
 	    	//url to retrive JSON object from wunderground.  API key: 1c48f3eebc8ead0c
 	        url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
-	        //url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/25.7617,-80.1918.json";
+	        //url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/29.9017,-97.4975.json";
 			
 		  //Picking out properties from wunderground JSON object and assigning them to variables.
 	      $.getJSON(url, function(json){
@@ -28,8 +28,10 @@ var currHour = (date.getHours() * 100) + date.getMinutes();
 	      	description = json["current_observation"]["weather"].toUpperCase();
 	      	sunset = json["moon_phase"]["sunset"]["hour"] + json["moon_phase"]["sunset"]["minute"];
 	      	sunrise = json["moon_phase"]["sunrise"]["hour"] + json["moon_phase"]["sunrise"]["minute"];
+	      	icon = json["current_observation"]["icon_url"];
 			$(".display-3").html(json["current_observation"]["display_location"]["full"]);
-	      	$(".lead").html(c + " &#8451 " + " | " + f + " &#8457<br>" + description + "<br> Local Time: " + date);
+	      	$(".lead").html(c + " &#8451 " + " | " + f + " &#8457<br>" + description + "<br> Local Time: " + date + "<img src ="+icon+">");
+	      	
 	      	
 	      	
 	      	//Function to determine 'weather' or not it is day or night.
@@ -43,83 +45,102 @@ var currHour = (date.getHours() * 100) + date.getMinutes();
 	      	
 			//[if else if] statements to determine what picture should populate the background
       		if(description === "CLEAR" && dayNight()){
-	      		$('#image').css('background-image', 'url(images/clear.jpg)');
+	      		$('#image').addClass('clear');
 	      	} 
 	      	else if(description === "CLEAR" && !dayNight()){
-	      		$('#image').css('background-image', 'url(images/clearNight.jpg)');
-	      		//$('#test').css('opacity', 0.6);
+	      		$('#image').addClass('clearNight');
 	      		$('#test').addClass('opacity6');
-	      		
 	      	} 
-	      	else if (dayNight() && description.indexOf("SCATTERED") >= 0 || description.indexOf("PARTLY") >= 0) {
-	      		//$('#image').css('background-image', 'url(images/scattered.jpg)');
-	      		//$('#test').css('opacity', 0.6);
+	      	else if (dayNight() && description.indexOf("SCATTERED") >= 0) {
 	      		$('#test').addClass('opacity6');
 	      		$('#image').addClass('scattered');
 	      	}
-	      	else if (description.indexOf("PARTLY") >= 0 || description.indexOf("SCATTERED") >= 0 && !dayNight()) {
-	      		$('#image').css('background-image', 'url(images/scatteredNight.jpg)');
-	      		//$('#test').css('opacity', 0.4);
+	      	else if (dayNight() && description.indexOf("PARTLY") >= 0) {
+	      		$('#test').addClass('opacity6');
+	      		$('#image').addClass('scattered');
+	      	}
+	      	else if (description.indexOf("SCATTERED") >= 0 && !dayNight()) {
+	      		$('#image').addClass('scatteredNight');
+	      		$('#test').addClass('opacity4');
+	      	}
+	      	else if (description.indexOf("PARTLY") >= 0 && !dayNight()) {
+	      		$('#image').addClass('scatteredNight');
 	      		$('#test').addClass('opacity4');
 	      	}
 	      	else if(description.indexOf("MOSTLY") >= 0 && dayNight()) {
-	      		$('#image').css('background-image', 'url(images/broken.jpg)');
+	      		$('#image').addClass('broken');
 	      	}
 	      	else if(description.indexOf("MOSTLY") >= 0 && !dayNight()) {
-	      		$('#image').css('background-image', 'url(images/brokenNight.jpg)');
-	      		//$('#test').css('opacity', 0.4);
+	      		$('#image').addClass('brokenNight');
 	      		$('#test').addClass('opacity4');
 	      	}
 	      	else if (description === "OVERCAST" && dayNight()){
-	      		$('#image').css('background-image', 'url(images/overcast.jpg)');
+	      		$('#image').addClass('overcast');
 	      	}
-	      	else if (dayNight() && description.indexOf("THUNDERSTORM") >= 0 || description.indexOf("HAIL") >= 0){
-	      		$('#image').css('background-image', 'url(images/thunderstorm.jpg)');
-	      		//$('#test').css('opacity', 0.7);
+	      	else if (dayNight() && description.indexOf("THUNDERSTORM") >= 0){
+	      		$('#image').addClass('thunderstorm');
 	      		$('#test').addClass('opacity7');
 	      	}
-	      	else if (description.indexOf("THUNDERSTORM") >= 0 || description.indexOf("HAIL") >= 0 && !dayNight()){
-	      		$('#image').css('background-image', 'url(images/thunderstormNight.jpg)');
-	      		//$('#test').css('opacity', 0.4);
+	      	else if (dayNight() && description.indexOf("HAIL") >= 0){
+	      		$('#image').addClass('thunderstorm');
+	      		$('#test').addClass('opacity7');
+	      	}
+	      	else if (description.indexOf("THUNDERSTORM") >= 0 && !dayNight()){
+	      		$('#image').addClass('thunderstormNight');
+	      		$('#test').addClass('opacity4');
+	      	}
+	      	else if (description.indexOf("HAIL") >= 0 && !dayNight()){
+	      		$('#image').addClass('thunderstormNight');
 	      		$('#test').addClass('opacity4');
 	      	}
 	      	else if (description.indexOf("SNOW") >= 0 && dayNight()){
-	      		$('#image').css('background-image', 'url(images/snow.jpg)');
-	      		//$('#test').css('opacity', 0.8);
+	      		$('#image').addClass('snow');
 	      		$('#test').addClass('opacity8');	
 	      	}
 	      	else if (description.indexOf("SNOW") >= 0 && !dayNight()){
-	      		$('#image').css('background-image', 'url(images/snowNight.jpg)');
-	      		//$('#test').css('opacity', 0.5);
+	      		$('#image').addClass('snowNight');
 	      		$('#test').addClass('opacity5');
 	      	}
-	      	else if (dayNight() && description.indexOf("RAIN") >= 0 || description.indexOf("DRIZZLE") >= 0){
-	      		$('#image').css('background-image', 'url(images/rain.jpg)');
-	      		//$('#test').css('opacity', 0.6);
+	      	else if (dayNight() && description.indexOf("RAIN") >= 0){
+	      		$('#image').addClass('rain');
 	      		$('#test').addClass('opacity6');
 	      	}
-	      	else if (description.indexOf("RAIN") >= 0 || description.indexOf("DRIZZLE") >= 0 && !dayNight()){
-	      		$('#image').css('background-image', 'url(images/rainNight.jpg)');
-	      		//$('#test').css('opacity', 0.4);
+	      	else if (dayNight() && description.indexOf("DRIZZLE") >= 0){
+	      		$('#image').addClass('rain');
+	      		$('#test').addClass('opacity6');
+	      	}
+	      	else if (description.indexOf("RAIN") >= 0 && !dayNight()){
+	      		$('#image').addClass('rainNight');
 	      		$('#test').addClass('opacity4');
 	      	}
-	      	else if (dayNight() && description.indexOf("FOG") >= 0 || description.indexOf("MIST") >= 0){
-	      		$('#image').css('background-image', 'url(images/fog.jpg)');
+	      	else if (description.indexOf("DRIZZLE") >= 0 && !dayNight()){
+	      		$('#image').addClass('rainNight');
+	      		$('#test').addClass('opacity4');
 	      	}
-	      	else if (dayNight() && description.indexOf("SMOKE") >= 0 || description.indexOf("HAZE") >= 0){
-	      		$('#image').css('background-image', 'url(images/haze.jpg)');
+	      	else if (dayNight() && description.indexOf("FOG") >= 0){
+	      		$('#image').addClass('fog');
+	      	}
+	      	else if (dayNight() && description.indexOf("MIST") >= 0){
+	      		$('#image').addClass('fog');
+	      	}
+	      	else if (dayNight() && description.indexOf("SMOKE") >= 0){
+	      		$('#image').addClass('smoke');
+	      	}
+	      	else if (dayNight() && description.indexOf("HAZE") >= 0){
+	      		$('#image').addClass('smoke');
 	      	}
 	      	else if (description.indexOf("VOLCANIC") >= 0){
-	      		$('#image').css('background-image', 'url(images/volcano.jpg)');
-	      		//$('#test').css('opacity', 0.5);
+	      		$('#image').addClass('volcanic');
 	      		$('#test').addClass('opacity5');
 	      	}
-	      	else if (dayNight() && description.indexOf("SAND") >= 0 || description.indexOf("DUST") >= 0){
-	      		$('#image').css('background-image', 'url(images/sand.jpg)');
+	      	else if (dayNight() && description.indexOf("SAND") >= 0){
+	      		$('#image').addClass('sand');
 	      	}
-	      	else if (!dayNight() && description === "OVERCAST" || description.indexOf("MIST") >= 0 || description.indexOf("HAZE") >=0 || description.indexOf("DUST") >=0 || description.indexOf("SAND") >=0 || description.indexOf("SMOKE") >=0 || description.indexOf("FOG") >=0){
-	      		$('#image').css('background-image', 'url(images/hazeNight.jpg)');
-	      		//$('#test').css('opacity', 0.4);
+	      	else if (dayNight() && description.indexOf("DUST") >= 0){
+	      		$('#image').addClass('sand');
+	      	}
+	      	else if (!dayNight() && description === "OVERCAST" || description.indexOf("MIST") >= 0 || description.indexOf("FOG") >=0 || description.indexOf("HAZE") >=0 || description.indexOf("SMOKE") >=0 || description.indexOf("FOG") >=0){
+	      		$('#image').addClass('overcastNight');
 	      		$('#test').addClass('opacity4');
 	      	}
 	      
