@@ -24,6 +24,14 @@
     left: 40%;
 }
 
+#enterZipCode{
+  padding-right: 60%;
+  padding-left: 4%;
+}
+#getLocation{
+  opacity:0.9;
+}
+
 .opacity4 {
   opacity: 0.4;
 }
