@@ -140,6 +140,11 @@ $(document).ready(function(){
 	function zipCode(){
     	$(".col-xs-12").html("<input type='text' id='zip' placeholder='Zip Code' autocomplete='off'/><button id = 'getLocation' class = 'btn btn-primary'>WEATHER</button>" );
        	$("#getLocation").on("click", function(){
+       		if($('#image').attr('class')){
+       			var lastClass = $('#image').attr('class').split(' ').pop();
+       			$('#image').removeClass(lastClass);
+       		}
+       		
         	zipCode = document.getElementById('zip').value;
         	url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" +zipCode+ ".json";
         	$(".loading").fadeIn(500);
@@ -152,8 +157,8 @@ $(document).ready(function(){
 			var lat = position.coords.latitude;
 			var lon = position.coords.longitude;
 	    	//url to retrive JSON object from wunderground.  API key: 1c48f3eebc8ead0c
-	    	url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
-	        //url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/29.9017,-97.4975.json";
+	    	//url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
+	        url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/41.6147,-112.1266.json";
 			getWeather();
 			zipCode();
 	        
