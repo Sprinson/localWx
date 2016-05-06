@@ -32,7 +32,11 @@
   padding-left: 4%;
 }
 #getLocation{
-  opacity:0.9;
+  
+}
+
+.opacity3 {
+  opacity: 0.3;
 }
 
 .opacity4 {
