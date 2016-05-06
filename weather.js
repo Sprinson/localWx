@@ -14,13 +14,18 @@ $(document).ready(function(){
 	        //url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/29.9017,-97.4975.json";
 			getWeather();
 	        
-	        $("#getLocation").on("click", function(){
-	        	zipCode = document.getElementById('zip').value;
-	        	url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" +zipCode+ ".json";
-	        	$(".loading").fadeIn(500);
-	        	getWeather();
-	        });
-			
+	        function zipCode(){
+	        	$(".col-xs-12").html("<input type='text' id='zip' placeholder='Zip Code'/><button id = 'getLocation' class = 'btn btn-primary'>Get More Weather</button>" );
+	        	$(".col-xs-12").addClass("opacity6");
+		       	$("#getLocation").on("click", function(){
+		        	zipCode = document.getElementById('zip').value;
+		        	url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" +zipCode+ ".json";
+		        	$(".loading").fadeIn(500);
+		        	getWeather();
+		        });
+			}
+		
+
 			function getWeather(){
 			  	$.getJSON(url, function(json){
 			  		c = json["current_observation"]["temp_c"];
@@ -31,7 +36,8 @@ $(document).ready(function(){
 			  		icon = json["current_observation"]["icon_url"];
 			  		$(".display-3").html(json["current_observation"]["display_location"]["full"]);
 			  		$(".lead").html(c + " &#8451 " + " | " + f + " &#8457<br>" + description + "<br> Local Time: " + date + "<img src ="+icon+">");
-
+			  		//$(".col-xs-12").html("<input type='text' id='zip' placeholder='Zip Code'/><button id = 'getLocation' class = 'btn btn-primary'>Get More Weather</button>" );
+			  		
 
 			      	//Function to determine 'weather' or not it is day or night.
 			      	function dayNight(){
@@ -45,6 +51,7 @@ $(document).ready(function(){
 					//[if else if] statements to determine what picture should populate the background
 					if(description === "CLEAR" && dayNight()){
 						$('#image').addClass('clear');
+						$('#test').addClass('opacity6');
 					} 
 					else if(description === "CLEAR" && !dayNight()){
 						$('#image').addClass('clearNight');
@@ -146,6 +153,7 @@ $(document).ready(function(){
 					$("body[id$='image']").fadeIn(5000);
 
 					$(".loading").fadeOut(1500);
+					zipCode();
 				});
 			}
 		});
