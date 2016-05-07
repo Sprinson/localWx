@@ -18,7 +18,8 @@ $(document).ready(function(){
 		  		sunrise = json["moon_phase"]["sunrise"]["hour"] + json["moon_phase"]["sunrise"]["minute"];
 		  		icon = json["current_observation"]["icon_url"];
 		  		$(".display-3").html(json["current_observation"]["display_location"]["full"]);
-		  		$(".lead").html(c + " &#8451 " + " | " + f + " &#8457<br>" + description + "<br> Local Time: " + date + "<img src ="+icon+">");		  		
+		  		$(".lead").html(c + " &#8451 " + " | " + f + " &#8457<br>" + description + "<br>" + json["current_observation"]["observation_time"] + "<img src ="+icon+">");		  		
+		  		console.log(json);
 
 		      	//Function to determine 'weather' or not it is day or night.
 		      	function dayNight(){
@@ -138,14 +139,16 @@ $(document).ready(function(){
 			});
 		}
 	function zipCode(){
-    	$(".col-xs-12").html("<input type='text' id='zip' placeholder='Zip Code' autocomplete='off'/><button id = 'getLocation' class = 'btn btn-primary'>WEATHER</button>" );
+    	$(".col-xs-12").html("<input type='text' id='zip' placeholder='Zip Code' autocomplete='off'/><button id = 'getLocation' class = 'btn btn-primary btn-sm'>WEATHER</button>" );
        	$("#getLocation").on("click", function(){
+       		zipCode = document.getElementById('zip').value;
+        	if(zipCode.length < 5 || zipCode.length > 5 || isNaN(zipCode)){
+        		alert("Please enter a zip code");
+        	}
        		if($('#image').attr('class')){
        			var lastClass = $('#image').attr('class').split(' ').pop();
        			$('#image').removeClass(lastClass);
        		}
-       		
-        	zipCode = document.getElementById('zip').value;
         	url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" +zipCode+ ".json";
         	$(".loading").fadeIn(500);
         	getWeather();
@@ -157,8 +160,8 @@ $(document).ready(function(){
 			var lat = position.coords.latitude;
 			var lon = position.coords.longitude;
 	    	//url to retrive JSON object from wunderground.  API key: 1c48f3eebc8ead0c
-	    	//url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
-	        url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/41.6147,-112.1266.json";
+	    	url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
+	        //url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/41.6147,-112.1266.json";
 			getWeather();
 			zipCode();
 	        
