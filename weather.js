@@ -1,11 +1,12 @@
 
 $(document).ready(function(){
 
+	//VARIABLES
 	var url, c, f, description, sunset, sunrise, icon, zipCode;
 	var date = new Date;
 	var currHour = (date.getHours() * 100) + date.getMinutes();
-	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor); 
-//Retrieving lat/lon of current location and storing them in variables.
+	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor); //FOR TESTING ON MY BOX
+
 
 	   
 	
@@ -20,7 +21,7 @@ $(document).ready(function(){
 		  		$(".display-3").html(json["current_observation"]["display_location"]["full"]);
 		  		$(".lead").html(c + " &#8451 " + " | " + f + " &#8457<br>" + description + "<br> Local Time: " + date + "<img src ="+icon+">");		  		
 
-		      	//Function to determine 'weather' or not it is day or night.
+		      	//FUNCTION TO DETERMINE 'WEATHER' OR NOT IT IS DAY / NIGHT
 		      	function dayNight(){
 		      		if (currHour < sunset && currHour > sunrise){
 		      			return true;
@@ -29,7 +30,7 @@ $(document).ready(function(){
 		      		}
 		      	}
 		      	
-				//[if else if] statements to determine what picture should populate the background and opactiy for the jumbotron.
+				//WHICH BACKGROUND IMAGE TO USE AND OPACITY FOR JUMBOTRON
 				if(description === "CLEAR" && dayNight()){
 					$('#image').addClass('clear');
 					$('#test').addClass('opacity6');
@@ -137,14 +138,14 @@ $(document).ready(function(){
 				$(".loading").fadeOut(1500);
 			});
 		}
+
 	function zipCode(){
     	$(".col-xs-12").html("<input type='text' id='zip' placeholder='Zip Code' autocomplete='off'/><button id = 'getLocation' class = 'btn btn-primary'>WEATHER</button>" );
        	$("#getLocation").on("click", function(){
        		if($('#image').attr('class')){
        			var lastClass = $('#image').attr('class').split(' ').pop();
        			$('#image').removeClass(lastClass);
-       		}
-       		
+       		}  		
         	zipCode = document.getElementById('zip').value;
         	url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" +zipCode+ ".json";
         	$(".loading").fadeIn(500);
@@ -157,14 +158,16 @@ $(document).ready(function(){
 			var lat = position.coords.latitude;
 			var lon = position.coords.longitude;
 	    	//url to retrive JSON object from wunderground.  API key: 1c48f3eebc8ead0c
-	    	//url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
-	        url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/41.6147,-112.1266.json";
+	    	url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/" + lat + "," + lon + ".json";
+	        //url = "https://api.wunderground.com/api/1c48f3eebc8ead0c/conditions/astronomy/forecast/alert/q/41.6147,-112.1266.json";
 			getWeather();
 			zipCode();
 	        
 	    });
 	}
-	
+	//geoLocation();
+
+	//TESTING ON MY BOX
 	if(isChrome){
 		zipCode();
 	}else{
